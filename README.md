@@ -1,15 +1,15 @@
 # gadoo
 
-A CLI tool for managing the lifecycle of custom Odoo addons.
+A CLI tool for managing the lifecycle of Odoo addons.
 
 ## What it is
 
-`gadoo` is for developers who build custom Odoo addons. The daily
+`gadoo` is for developers who work with Odoo addons. The daily
 workflow is simple:
 
 ```sh
-gadoo upgrade foo    # upgrade a custom addon
-gadoo install foo    # install a custom addon
+gadoo upgrade foo    # upgrade an addon
+gadoo install foo    # install an addon
 ```
 
 ## Install
