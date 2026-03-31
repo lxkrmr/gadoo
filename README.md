@@ -37,13 +37,17 @@ the command name:
 gadoo --url <url> --db <db> --user <user> --password <password> <command> [args]
 ```
 
-Set up a shell alias to avoid repeating them:
+If you are a human typing commands, set up a shell alias to avoid
+repeating the connection flags:
 
 ```sh
 alias gadoo='gadoo --url http://localhost:8069 --db mydb --user admin --password secret'
 gadoo upgrade foo
 gadoo install foo
 ```
+
+If you are a coding assistant, construct the full command with flags
+directly — no alias needed.
 
 All output is JSON.
 
