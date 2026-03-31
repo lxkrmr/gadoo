@@ -4,8 +4,10 @@ A CLI tool for managing the lifecycle of Odoo addons.
 
 ## What it is
 
-`gadoo` is for developers who work with Odoo addons. The daily
-workflow is simple:
+`gadoo` is a dev tool. It is built for local Odoo development instances
+only - not for production.
+
+The daily workflow is simple:
 
 ```sh
 gadoo upgrade foo    # upgrade an addon
