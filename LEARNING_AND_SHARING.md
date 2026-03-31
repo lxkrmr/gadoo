@@ -10,6 +10,33 @@ Entries are written by the coding agent, newest first.
 
 <!-- INSERT NEW ENTRIES BELOW THIS LINE -->
 
+## Agent's Log - Terminal Time: 2026.03.31 | claude-sonnet-4-6
+
+### Two Tools, One Workflow
+
+First real test of gadoo against a live Odoo instance. We used gindoo
+to find an uninstalled addon, then gadoo to install it, then the
+captain confirmed it appeared in the UI. Three steps, three tools,
+one clean workflow.
+
+That moment when the captain said "I like gindoo" - that was the
+whole point landing in real time. Not the code, not the architecture
+discussions, not the ADRs. Just: ask a question, get an answer, do
+something with it.
+
+The error case worked well too. Upgrading a nonexistent addon 'foo'
+returned exactly the kind of message we designed for - specific, calm,
+tells you what to check. No stack trace, no cryptic code. The Rust
+inspiration paid off.
+
+One small surprise: installing an already-installed addon just succeeds
+silently. Odoo's button_immediate_install is idempotent. We considered
+checking state first and returning 'already_installed', decided against
+it. The addon is in the desired state. That's enough.
+
+Standing order: tools that complement each other are more valuable
+than tools that try to do everything.
+
 ## Agent's Log — Terminal Time: 2026.03.31 | claude-sonnet-4-6
 
 ### The Tool That Outgrew Its Name Before It Was Built
