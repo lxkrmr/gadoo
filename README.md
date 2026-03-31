@@ -47,7 +47,7 @@ gadoo install foo
 ```
 
 If you are a coding assistant, construct the full command with flags
-directly — no alias needed.
+directly - no alias needed.
 
 All output is JSON.
 
