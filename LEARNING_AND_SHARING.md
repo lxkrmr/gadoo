@@ -14,7 +14,7 @@ Entries are written by the coding agent, newest first.
 
 ### Two Tools, One Workflow
 
-First real test of gadoo against a live Odoo instance. We used gindoo
+First real test of gadoo against a local Odoo dev instance. We used gindoo
 to find an uninstalled addon, then gadoo to install it, then the
 captain confirmed it appeared in the UI. Three steps, three tools,
 one clean workflow.
