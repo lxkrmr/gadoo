@@ -11,14 +11,16 @@ import (
 const upgradeHelp = `Upgrade an Odoo addon.
 
 Usage:
-  gadoo [connection flags] upgrade <addon>
+  gadoo upgrade <addon>
 
 Arguments:
   addon     Technical addon name (e.g. sale, my_custom_addon)
 
 Examples:
   gadoo upgrade my_custom_addon
-  gadoo upgrade sale`
+  gadoo upgrade sale
+
+Uses the current context. Set it with: gadoo context use <name>`
 
 // upgradeInput holds the parsed data for an upgrade command.
 type upgradeInput struct {
@@ -58,7 +60,7 @@ func buildUpgradeResult(addon string) map[string]any {
 }
 
 // RunUpgrade executes the upgrade command: upgrades an Odoo addon.
-func RunUpgrade(args []string, conn ConnFlags) {
+func RunUpgrade(args []string) {
 	input, err := parseUpgradeArgs(args)
 	if err == flag.ErrHelp {
 		os.Exit(0)
@@ -67,6 +69,14 @@ func RunUpgrade(args []string, conn ConnFlags) {
 		write(errorPayload("upgrade", err))
 		os.Exit(1)
 	}
+
+	_, ctx, err := GetCurrentContext()
+	if err != nil {
+		write(errorPayload("upgrade", err))
+		os.Exit(1)
+	}
+
+	conn := ConvertContextToConnFlags(ctx)
 
 	client, err := conn.Connect()
 	if err != nil {

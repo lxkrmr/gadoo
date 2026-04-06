@@ -10,8 +10,9 @@ only - not for production.
 The daily workflow is simple:
 
 ```sh
-gadoo upgrade foo    # upgrade an addon
-gadoo install foo    # install an addon
+gadoo context create mydev     # one time
+gadoo upgrade foo              # upgrade addon
+gadoo install bar              # install addon
 ```
 
 ## Install
@@ -30,26 +31,47 @@ the module proxy cache with:
 GOPROXY=direct go install github.com/lxkrmr/gadoo@latest
 ```
 
+## Setup
+
+Before using `gadoo`, create a connection context:
+
+```sh
+gadoo context create mydev
+```
+
+This will prompt for:
+- URL (e.g. http://localhost:8069)
+- Database name
+- Login user
+- Password
+
+The context is saved to `~/.config/gadoo/contexts.json` and can be
+reused. If you have multiple Odoo instances:
+
+```sh
+gadoo context create mydev
+gadoo context create staging
+gadoo context list
+gadoo context use staging   # switch between contexts
+```
+
 ## Usage
 
-Connection flags are required for every command and must come before
-the command name:
+### Manage contexts
 
 ```sh
-gadoo --url <url> --db <db> --user <user> --password <password> <command> [args]
+gadoo context create <name>   # Create a new connection context
+gadoo context list            # Show all contexts (current marked with *)
+gadoo context use <name>      # Set as current context
+gadoo context remove <name>   # Delete a context
 ```
 
-If you are a human typing commands, set up a shell alias to avoid
-repeating the connection flags:
+### Manage addons
 
 ```sh
-alias gadoo='gadoo --url http://localhost:8069 --db mydb --user admin --password secret'
-gadoo upgrade foo
-gadoo install foo
+gadoo upgrade <addon>   # Upgrade an installed addon
+gadoo install <addon>   # Install a new addon
 ```
-
-If you are a coding assistant, construct the full command with flags
-directly - no alias needed.
 
 All output is JSON.
 

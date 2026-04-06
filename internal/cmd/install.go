@@ -11,14 +11,16 @@ import (
 const installHelp = `Install an Odoo addon.
 
 Usage:
-  gadoo [connection flags] install <addon>
+  gadoo install <addon>
 
 Arguments:
   addon     Technical addon name (e.g. sale, my_custom_addon)
 
 Examples:
   gadoo install my_custom_addon
-  gadoo install sale`
+  gadoo install sale
+
+Uses the current context. Set it with: gadoo context use <name>`
 
 // installInput holds the parsed data for an install command.
 type installInput struct {
@@ -58,7 +60,7 @@ func buildInstallResult(addon string) map[string]any {
 }
 
 // RunInstall executes the install command: installs an Odoo addon.
-func RunInstall(args []string, conn ConnFlags) {
+func RunInstall(args []string) {
 	input, err := parseInstallArgs(args)
 	if err == flag.ErrHelp {
 		os.Exit(0)
@@ -67,6 +69,14 @@ func RunInstall(args []string, conn ConnFlags) {
 		write(errorPayload("install", err))
 		os.Exit(1)
 	}
+
+	_, ctx, err := GetCurrentContext()
+	if err != nil {
+		write(errorPayload("install", err))
+		os.Exit(1)
+	}
+
+	conn := ConvertContextToConnFlags(ctx)
 
 	client, err := conn.Connect()
 	if err != nil {

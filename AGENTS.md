@@ -28,8 +28,12 @@ Do not commit without tests where tests are meaningful.
 
 An agent must be able to discover and use `gadoo` through the CLI alone.
 
+`gadoo` is always installed from GitHub via `go install`, never built
+locally. This ensures the agent has a clean, reproducible environment
+without depending on the source tree state.
+
 `gadoo --help` and every subcommand help must be sufficient to understand
-what the tool does, how to connect, and how to call each command.
+what the tool does, how to connect via contexts, and how to call each command.
 
 Error messages must explain what failed and suggest the next concrete
 step. Errors should read like Rust errors — specific, human, actionable
